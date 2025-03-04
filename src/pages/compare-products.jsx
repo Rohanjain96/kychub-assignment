@@ -2,7 +2,8 @@ import { Button, Spin, Table } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import { API_URL } from "../constants/url";
 import { ProductsContext } from "../contexts/product-context";
-import AddProductModal from "../components/addProductModal";
+import AddProductModal from "../components/add-product-modal";
+
 const CompareProductTable = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
