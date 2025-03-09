@@ -8,7 +8,7 @@ const CompareProductTable = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [openModal, setOpenModal] = useState(false)
-    const { ids } = useContext(ProductsContext)
+    const { ids, removeId } = useContext(ProductsContext)
 
     const onClose = () => {
         setOpenModal(false);
@@ -52,6 +52,11 @@ const CompareProductTable = () => {
                     }}>
                         <strong>Category</strong>
                     </p>
+                    <p style={{
+                        paddingBlock: '16px'
+                    }}>
+                        <strong>Action</strong>
+                    </p>
                 </div>
             ),
         },
@@ -70,6 +75,7 @@ const CompareProductTable = () => {
                     <p style={{
                         paddingBlock: '16px'
                     }}>{product.category}</p>
+                    <Button onClick={() => removeId(product.id)} type="primary">Remove</Button>
                 </div>
             ),
         })),
@@ -90,7 +96,7 @@ const CompareProductTable = () => {
                         >
 
                             <p>Add one or more products to compare</p>
-                            <Button onClick={() => setOpenModal(true)} type="primary">Add Product</Button>
+                            <Button onClick={() => setOpenModal(true)} type="primary">Add More</Button>
                         </div>
                     ),
                 },
@@ -130,7 +136,7 @@ const CompareProductTable = () => {
                         width: '100%',
                     }}>
                         <div style={{ display: 'flex', width: '100%', justifyContent: 'center', marginBottom: '24px' }}>
-                            <Button onClick={() => setOpenModal(true)} type="primary">Add Product</Button>
+                            <Button onClick={() => setOpenModal(true)} type="primary">Add More</Button>
                         </div>
                         <Spin spinning={loading}>
 

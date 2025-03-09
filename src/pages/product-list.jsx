@@ -3,8 +3,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { API_URL } from "../constants/url";
 import { Button, message, Table } from "antd";
 import { ProductsContext } from "../contexts/product-context";
+import { useNavigate } from "react-router";
 
 const ProductList = () => {
+    const navigate = useNavigate()
     const [messageApi] = message.useMessage();
     const [allProducts, setAllProducts] = useState([]);
     const [pagination, setPagination] = useState({
@@ -14,7 +16,7 @@ const ProductList = () => {
     });
     const [loading, setLoading] = useState(false);
     const [sorter, setSorter] = useState({ field: null, order: null });
-    const { ids, addId, removeId } = useContext(ProductsContext);
+    const { ids, addId } = useContext(ProductsContext);
 
     const fetchProducts = async (
         page = 1,
@@ -96,16 +98,13 @@ const ProductList = () => {
                     <Button
                         variant="filled"
                         color="primary"
-                        disabled={!isAdded && ids.length === 4}
+                        disabled={isAdded}
                         onClick={() => {
-                            if (isAdded) {
-                                removeId(record.id);
-                            } else {
-                                addId(record.id);
-                            }
+                            addId(record.id);
+                            navigate('/compare-products')
                         }}
                     >
-                        {isAdded ? 'Remove' : 'Compare'}
+                        Compare
                     </Button>
                 );
             }
